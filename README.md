@@ -7,7 +7,7 @@ Open console in project root folder and run command `npm i`
 
 ## Config
 ### Discord Bot Token
-In *src\config\default.js* chnage discord.token value to your token.
+In *src\config\default.js* change discord.token value to your token.
 
 ## Run app
 `npm start`
@@ -17,4 +17,4 @@ In *src\config\default.js* chnage discord.token value to your token.
 2. Add custom config properties to module.exports object
 3. Run app with set environment variable NODE_ENV:
     * Windows: `SET NODE_ENV=[config_name] & npm start` 
-    * Linux: `export NODE_ENV=[config_name] npm start`
+    * Linux: `NODE_ENV=[config_name] npm start`

@@ -12,26 +12,33 @@ function hasRole(roles, role){
     return roles.cache.find(r => r.name === role)
 }
 
+function getMessageContent(message){
+    return message.content.substring(message.content.indexOf(' ') + 1);
+}
+
+function redCommand(message){
+    if(hasRole(message.member.roles, 'Red Pass')){
+        message.delete()
+        .then(msg => msg.channel.send('```diff\n- '+getMessageContent(message)+'```'))
+        .catch(console.error);
+    }
+}
+
+function blueCommand(message){
+    message.delete()
+        .then(msg => msg.channel.send('```ini\n[ '+getMessageContent(message)+' ]```'))
+        .catch(console.error);
+}
+
+const commands = {
+    '>red': redCommand,
+    '>blue': blueCommand
+}
+
 client.on('message', message => {
-    var cmnd = message.content.split(' ')[0];
-    var content = message.content.substring(message.content.indexOf(' ') + 1)
-    if(message.content.split(' ').length > 1){
-        switch(cmnd){
-            case '>red':
-                if(hasRole(message.member.roles, 'Red Pass')){
-                    message.delete()
-                    .then(msg => msg.channel.send('```diff\n- '+content+'```'))
-                    .catch(console.error);
-                }
-                break;
-            case '>blue':
-                message.delete()
-                .then(msg => msg.channel.send('```ini\n[ '+content+' ]```'))
-                .catch(console.error);
-                break;
-            default:
-                break;
-        }
+    const cmnd = message.content.split(' ')[0];
+    if(message.content.split(' ').length > 1 && commands[cmnd]){
+        commands[cmnd](message);
     }
 });
 
