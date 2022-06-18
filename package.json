@@ -1,0 +1,14 @@
+{
+  "name": "redbluebot",
+  "version": "0.0.1-SNAPSHOT",
+  "description": "Discord bot doing random things",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node ."
+  },
+  "author": "Tin",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^12.5.3"
+  }
+}
