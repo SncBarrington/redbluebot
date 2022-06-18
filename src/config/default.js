@@ -1,5 +1,4 @@
-module.exports = {
-    discord: {
-        token: '[your bot token]'
-    }
+export let config = {
+    token: '[your bot token]',
+    clientId: '[your application client id]'
 };

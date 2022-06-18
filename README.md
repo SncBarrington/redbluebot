@@ -6,8 +6,8 @@
 Open console in project root folder and run command `npm i`
 
 ## Config
-### Discord Bot Token
-In *src\config\default.js* change discord.token value to your token.
+### Bot token and app client ID 
+In *src\config\default.js* change `token` and `clientId` values to your bot token and application client ID respectively.
 
 ## Run app
 `npm start`

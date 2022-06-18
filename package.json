@@ -3,12 +3,16 @@
   "version": "0.0.1-SNAPSHOT",
   "description": "Discord bot doing random things",
   "main": "src/index.js",
+  "type": "module",
   "scripts": {
-    "start": "node ."
+    "start": "node ./src/reg-command.js && node ."
   },
   "author": "Tin",
   "license": "ISC",
   "dependencies": {
-    "discord.js": "^12.5.3"
+    "@discordjs/builders": "^0.15.0",
+    "@discordjs/rest": "^0.5.0",
+    "discord-api-types": "^0.34.0",
+    "discord.js": "^13.8.0"
   }
 }

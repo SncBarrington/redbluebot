@@ -1,45 +1,27 @@
-const { Client, Intents } = require('discord.js');
+import { Client, Intents } from 'discord.js';
+import { blueCommand, redCommand } from './bot-commands.js';
+const envPath = (env) => `./config/${env}.js`;
+const appConfig = await import(envPath(process.env.NODE_ENV.trim() || 'default'));
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
-const env = process.env.NODE_ENV.trim() || 'default';
-const config  = require('./config/' + env + '.js');
 
 client.once('ready', () => {
-    console.log('using env \''+env+'\'')
 	console.log('redbluebot is running');
 });
 
-function hasRole(roles, role){
-    return roles.cache.find(r => r.name === role)
-}
-
-function getMessageContent(message){
-    return message.content.substring(message.content.indexOf(' ') + 1);
-}
-
-function redCommand(message){
-    if(hasRole(message.member.roles, 'Red Pass')){
-        message.delete()
-        .then(msg => msg.channel.send('```diff\n- '+getMessageContent(message)+'```'))
-        .catch(console.error);
-    }
-}
-
-function blueCommand(message){
-    message.delete()
-        .then(msg => msg.channel.send('```ini\n[ '+getMessageContent(message)+' ]```'))
-        .catch(console.error);
-}
-
 const commands = {
-    '>red': redCommand,
-    '>blue': blueCommand
+    'red': redCommand,
+    'blue': blueCommand,
 }
 
-client.on('message', message => {
-    const cmnd = message.content.split(' ')[0];
-    if(message.content.split(' ').length > 1 && commands[cmnd]){
-        commands[cmnd](message);
+client.on('interactionCreate', async interaction => {
+	if (!interaction.isCommand()) return;
+
+    await interaction.reply('Processing...');
+	const { commandName } = interaction;
+    if(commands[commandName]){
+        await commands[commandName](interaction,client);
     }
+    await interaction.deleteReply();
 });
 
-client.login(config.discord.token);
+client.login(appConfig.config.token);
