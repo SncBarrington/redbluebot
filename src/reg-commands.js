@@ -35,8 +35,7 @@ const commands = [
         ))
     .addChannelOption(option => 
         option.setName('channel')
-        .setDescription('Select output channel')
-        .setRequired(true)
+        .setDescription('Select output channel (leave empty to reset)')
         ),
 ]
 	.map(command => command.toJSON());
