@@ -8,8 +8,8 @@ https://discord.com/api/oauth2/authorize?client_id=810200441752387634&permission
 Open console in project root folder and run command `npm i`
 
 ## Config
-### Bot token and app client ID 
-In *src\config\default.js* change token and clientId values to your bot token and application client ID respectively.
+### Bot token
+In *src\config\default.js* change token value to your bot token
 
 ## Run app
 `npm start`
